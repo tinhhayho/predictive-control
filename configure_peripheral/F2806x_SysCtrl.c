@@ -291,10 +291,10 @@ void InitPeripheralClocks(void)
 // LOSPCP prescale register settings, normally it will be set to default values
 
 // GpioCtrlRegs.GPAMUX2.bit.GPIO18 = 3;  // GPIO18 = XCLKOUT
-   SysCtrlRegs.LOSPCP.all = 0x0002;
+   SysCtrlRegs.LOSPCP.all = 0x0002;// chia 4
 
 // XCLKOUT to SYSCLKOUT ratio.  By default XCLKOUT = 1/4 SYSCLKOUT
-   SysCtrlRegs.XCLK.bit.XCLKOUTDIV=2;
+   SysCtrlRegs.XCLK.bit.XCLKOUTDIV=2; // clock  pinout for test  = sysclockout
 
 // Peripheral clock enables set for the selected peripherals.
 // If you are not using a peripheral leave the clock off
@@ -305,7 +305,7 @@ void InitPeripheralClocks(void)
 //
 // This function is not written to be an example of efficient code.
 
-
+   SysCtrlRegs.PCLKCR0.bit.SCIAENCLK = 1;     // SCI-A
 
    SysCtrlRegs.PCLKCR3.bit.CPUTIMER0ENCLK = 1; // CPU Timer 0
    SysCtrlRegs.PCLKCR3.bit.CPUTIMER1ENCLK = 1; // CPU Timer 1

@@ -50,6 +50,7 @@ void main(void)
 // illustrates how to set the GPIO to it's default state.
    // InitGpio(); Skipped for this example
    InitGpio();
+   InitSciaGpio();
 
 // Step 3. Clear all interrupts and initialize PIE vector table:
 // Disable CPU interrupts
@@ -124,9 +125,6 @@ void main(void)
            scia_xmit(ReceivedChar);
 
            LoopCount++;
-
-
-
        }
 }
 
@@ -140,6 +138,7 @@ void scia_echoback_init(void)
     SciaRegs.SCICTL1.all = 0x0003;
     SciaRegs.SCICTL2.bit.TXINTENA = 1;
     SciaRegs.SCICTL2.bit.RXBKINTENA = 1;
+    //9600
     SciaRegs.SCIHBAUD = 0x0001;
     SciaRegs.SCILBAUD = 0x0024;
     SciaRegs.SCICTL1.all = 0x0023;
