@@ -137,8 +137,9 @@ void scia_msg(char *msg)
 
 void scia_fifo_init(void)
 {
-    SciaRegs.SCIFFCT.all = 0xE040;
+    SciaRegs.SCIFFTX.all = 0xE040;
     SciaRegs.SCIFFRX.all = 0x2044;
+
     SciaRegs.SCIFFCT.all  = 0x0;
 }
 #endif // endif DSP28_SCIB
