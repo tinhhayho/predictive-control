@@ -176,6 +176,11 @@ struct SCI_REGS {
 //---------------------------------------------------------------------------
 // Sci External References & Function Declarations:
 //
+void scia_xmit(int a);
+void scia_msg(char *msg);
+void scia_fifo_init(void);
+
+
 extern volatile struct SCI_REGS SciaRegs;
 extern volatile struct SCI_REGS ScibRegs;
 

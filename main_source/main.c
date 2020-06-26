@@ -30,11 +30,12 @@
 
 // Select the example to compile in.  Only one example should be set as 1
 // the rest should be set as 0.
-__interrupt void cpu_timer0_isr(void);
+Uint16   LoopCount = 0;
+Uint16   ErrorCount = 0;
 
 // Prototype statements for functions found within this file.
-void Gpio_setup1(void);
-
+void scia_echoback_init(void);
+__interrupt void cpu_timer0_isr(void);
 
 void main(void)
 {
@@ -94,11 +95,55 @@ void main(void)
    EINT;
    ERTM;
 // Step 5. User specific code:
+   LoopCount = 0;
+   ErrorCount = 0;
+   Uint16 ReceivedChar;
+   char *msg;
+   scia_fifo_init();
+   scia_echoback_init();
 
-   while(1);
+   msg = "\r\n\n\n Hello World!\0";
+   scia_msg(msg);
+   msg = "\r\n hello day la echo tu F28069 nha \n\0";
+   scia_msg(msg);
+
+   while(1)
+       {
+           msg = " \r\n Enter a character :\0";
+           scia_msg(msg);
+
+
+           //wait for inc character
+           while(SciaRegs.SCIFFRX.bit.RXFFST != 1);
+
+           // get character
+           ReceivedChar = SciaRegs.SCIRXBUF.all;
+           // echo character back
+           msg = " you sent: \0";
+           scia_msg(msg);
+           scia_xmit(ReceivedChar);
+
+           LoopCount++;
+
+
+
+       }
 }
 
-
+void scia_echoback_init(void)
+{
+    // 1 stop bit, no loopback
+    // no parity, 8 char bit
+    SciaRegs.SCICCR.all = 0x0007;
+    //enable TX, RX, internal SCICLK
+    //Disable RX ERR, SLEEP, TXWAKE
+    SciaRegs.SCICTL1.all = 0x0003;
+    SciaRegs.SCICTL2.bit.TXINTENA = 1;
+    SciaRegs.SCICTL2.bit.RXBKINTENA = 1;
+    SciaRegs.SCIHBAUD = 0x0001;
+    SciaRegs.SCILBAUD = 0x0024;
+    SciaRegs.SCICTL1.all = 0x0023;
+}
 
 // interrupt service routing
 __interrupt void cpu_timer0_isr(void)
