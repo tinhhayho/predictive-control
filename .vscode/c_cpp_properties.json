@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "defines": [
+                "__interrupt = static",
+                "PINT = long"
+            ],
+            "cppStandard": "gnu++14",
+            "intelliSenseMode": "gcc-arm",
+            "includePath": [
+                "/home/tinh/workspace_v10/T_NCP/include_path/**",
+                "/opt/ti/ccs1000/ccs/tools/compiler/ti-cgt-c2000_20.2.0.LTS/**",
+                "/opt/ti/ccs1000/ccs/tools/compiler/ti-cgt-c2000_20.2.0.LTS/include"
+            ],
+            "cStandard": "c89",
+            "compilerPath": "/opt/ti/ccs1000/ccs/tools/compiler/ti-cgt-c2000_20.2.0.LTS/bin/cl2000"
+        }
+    ],
+    "version": 4
+}

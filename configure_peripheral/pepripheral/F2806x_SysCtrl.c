@@ -306,10 +306,9 @@ void InitPeripheralClocks(void)
 // This function is not written to be an example of efficient code.
 
    SysCtrlRegs.PCLKCR0.bit.SCIAENCLK = 1;     // SCI-A
-
+   SysCtrlRegs.PCLKCR0.bit.ADCENCLK =1 ;       // ADC 
    SysCtrlRegs.PCLKCR3.bit.CPUTIMER0ENCLK = 1; // CPU Timer 0
-   SysCtrlRegs.PCLKCR3.bit.CPUTIMER1ENCLK = 1; // CPU Timer 1
-   SysCtrlRegs.PCLKCR3.bit.CPUTIMER2ENCLK = 1; // CPU Timer 2
+//   SysCtrlRegs.PCLKCR3.bit.CPUTIMER2ENCLK = 1; // CPU Timer 2
 
 
 

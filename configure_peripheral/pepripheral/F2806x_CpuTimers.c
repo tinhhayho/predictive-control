@@ -31,8 +31,9 @@ void InitCpuTimers(void)
     // CPU Timer 0
 	// Initialize address pointers to respective timer registers:
 	CpuTimer0.RegsAddr = &CpuTimer0Regs;
-	// Initialize timer period to maximum:
-	CpuTimer0Regs.PRD.all  = 0xFFFFFFFF;
+	// Initialize timer period  = 100 US : 9000 PULSE:
+	//CpuTimer0Regs.PRD.all  = 0x00002328;
+	   CpuTimer0Regs.PRD.all  = 0xFFFFFFFF; //90 trieu xung
 	// Initialize pre-scale counter to divide by 1 (SYSCLKOUT):
 	CpuTimer0Regs.TPR.all  = 0;
 	CpuTimer0Regs.TPRH.all = 0;
@@ -40,31 +41,12 @@ void InitCpuTimers(void)
 	CpuTimer0Regs.TCR.bit.TSS = 1;
 	// Reload all counter register with period value:
 	CpuTimer0Regs.TCR.bit.TRB = 1;
+	CpuTimer0Regs.TCR.bit.SOFT =0;
+	CpuTimer0Regs.TCR.bit.FREE =0;
 	// Reset interrupt counters:
-	//CpuTimer0.InterruptCount = 0;
-
-
-// Initialize address pointers to respective timer registers:
-	CpuTimer1.RegsAddr = &CpuTimer1Regs;
-	CpuTimer2.RegsAddr = &CpuTimer2Regs;
-	// Initialize timer period to maximum:
-	CpuTimer1Regs.PRD.all  = 0xFFFFFFFF;
-	CpuTimer2Regs.PRD.all  = 0xFFFFFFFF;
-    // Initialize pre-scale counter to divide by 1 (SYSCLKOUT):
-	CpuTimer1Regs.TPR.all  = 0;
-	CpuTimer1Regs.TPRH.all = 0;
-	CpuTimer2Regs.TPR.all  = 0;
-	CpuTimer2Regs.TPRH.all = 0;
-    // Make sure timers are stopped:
-	CpuTimer1Regs.TCR.bit.TSS = 1;
-	CpuTimer2Regs.TCR.bit.TSS = 1;
-	// Reload all counter register with period value:
-	CpuTimer1Regs.TCR.bit.TRB = 1;
-	CpuTimer2Regs.TCR.bit.TRB = 1;
-	// Reset interrupt counters:
-	//CpuTimer1.InterruptCount = 0;
-	//CpuTimer2.InterruptCount = 0;
-
+	CpuTimer0.InterruptCount = 0;
+	// enable interrupt Timer0
+	CpuTimer0Regs.TCR.bit.TIE = 1;
 }
 
 //---------------------------------------------------------------------------

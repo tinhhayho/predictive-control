@@ -9,6 +9,8 @@
 // $Release Date: February  2, 2016 $
 // $Copyright: Copyright (C) 2011-2016 Texas Instruments Incorporated -
 //             http://www.ti.com/ ALL RIGHTS RESERVED $
+// modify again : Nguyen Trung Tinh
+// email : tinhhayho@gmail.com
 //###########################################################################
 
 #ifndef F2806x_GLOBALPROTOTYPES_H
@@ -179,13 +181,12 @@ extern void InitPieCtrl(void);
 extern void InitPieVectTable(void);
 
 extern void InitSci(void);
-extern void InitSciGpio(void);
-#if DSP28_SCIA
-extern void InitSciaGpio(void);
-#endif // endif DSP28_SCIA
-#if DSP28_SCIB
-extern void InitScibGpio(void);
-#endif // endif DSP28_SCIB
+extern void scia_xmit(int a);
+extern void scia_msg(char *msg);
+extern void scia_fifo_init(void);
+extern void SciDisable(void);
+extern void SciEnable(void);
+
 
 extern void InitSpi(void);
 extern void InitSpiGpio(void);
